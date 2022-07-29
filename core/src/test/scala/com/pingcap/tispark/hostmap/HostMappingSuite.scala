@@ -66,6 +66,7 @@ class HostMappingSuite extends FunSuite {
         conf.set("spark.sql.extensions", "org.apache.spark.sql.TiExtensions")
         conf.set("spark.sql.catalog.tidb_catalog", TiCatalog.className)
         conf.set("spark.sql.catalog.tidb_catalog.pd.addresses", fakePdAddresses + port)
+        conf.set("spark.tispark.telemetry.enable", "false")
         conf.set(HOST_MAPPING, fakePdAddresses + ":" + pdAddresses)
         sc = new SparkContext("local[4]", "host-mapping-test", conf)
         val spark = SparkSession.builder().config(sc.getConf).getOrCreate()
